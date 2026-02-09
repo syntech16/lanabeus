@@ -25,4 +25,4 @@ fun Navigation(modifier: Modifier = Modifier) {
             //AditzakScreen() //TODO
         }
     }
-}F
+}

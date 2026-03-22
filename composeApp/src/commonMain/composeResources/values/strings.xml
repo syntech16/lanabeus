@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+    <!-- Hasiera -->
+    <string name="hasiera_zenbakiak_btn">Zenbakiak</string>
+    <string name="hasiera_aditzak_btn">Aditzak</string>
+
+    <!-- Zenbakiak -->
+    <string name="zenbakiak_topbar">Zenbakiak</string>
+    <string name="zenbakiak_zifretatik_letretara_txt">Zifretatik letretara</string>
+    <string name="zenbakiak_bihurtu_btn">Bihurtu</string>
+</resources>

@@ -14,6 +14,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import lanabeus.composeapp.generated.resources.Res
+import lanabeus.composeapp.generated.resources.app_name
+import lanabeus.composeapp.generated.resources.hasiera_aditzak_btn
+import lanabeus.composeapp.generated.resources.hasiera_zenbakiak_btn
+import org.jetbrains.compose.resources.stringResource
 
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -38,7 +43,7 @@ fun HasieraScreen(
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier.padding(8.dp)
             ) {
-                Text("Zenbakiak")
+                Text(stringResource(Res.string.hasiera_zenbakiak_btn))
             }
 
             Button(
@@ -46,7 +51,7 @@ fun HasieraScreen(
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
                 shape = RoundedCornerShape(12.dp)
             ) {
-                Text("Aditzak")
+                Text(stringResource(Res.string.hasiera_aditzak_btn))
             }
         }
     }

@@ -49,7 +49,8 @@ fun HasieraScreen(
             Button(
                 onClick = { onNavigateToAditzak },
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+                enabled = false
             ) {
                 Text(stringResource(Res.string.hasiera_aditzak_btn))
             }

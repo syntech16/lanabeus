@@ -68,4 +68,35 @@ object Zenbaki {
 
         return zenbakiaLetretan
     }
+
+    fun letretan1000BainoGutxiago(zenbakiaZifretan: Int): String {
+        var ehunekoak: Int = zenbakiaZifretan / 100
+        var ehunekoenHondarra: Int = zenbakiaZifretan % 100
+        var zenbakiaLetretan: String = ""
+
+        if (ehunekoak != 0) {
+            zenbakiaLetretan = when (ehunekoak) {
+                2 -> "berr"
+                1 -> ""
+                else -> letretan10BainoGutxiago(ehunekoak)
+            }
+
+            zenbakiaLetretan += when (ehunekoak) {
+                3, 4 -> "r"
+                else -> ""
+            }
+
+            zenbakiaLetretan += "ehun"
+
+            if (ehunekoenHondarra != 0) {
+                zenbakiaLetretan += " eta "
+            }
+        }
+
+        if (!(ehunekoak != 0 && ehunekoenHondarra == 0)) {
+            zenbakiaLetretan += letretan100BainoGutxiago(ehunekoenHondarra)
+        }
+
+        return zenbakiaLetretan
+    }
 }

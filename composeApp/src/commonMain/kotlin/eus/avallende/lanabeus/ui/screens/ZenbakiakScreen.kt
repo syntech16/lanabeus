@@ -1,10 +1,8 @@
 package eus.avallende.lanabeus.ui.screens
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeGesturesPadding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -20,7 +18,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
-import eus.avallende.lanabeus.utils.Zenbaki
+import eus.avallende.lanabeus.model.zenbaki.Zenbaki
 import lanabeus.composeapp.generated.resources.Res
 import lanabeus.composeapp.generated.resources.zenbakiak_topbar
 import lanabeus.composeapp.generated.resources.zenbakiak_zifretatik_letretara_txt
@@ -64,7 +62,7 @@ fun ZenbakiakScreen() {
                             try {
                                 zenbakiaZifrekin = zenbakiaZifrekinStringean.toInt()
                                 if (zenbakiaZifrekin < 1000) {
-                                    zenbakiaLetrekin = Zenbaki.letretan1000BainoGutxiago(zenbakiaZifrekin)
+                                    zenbakiaLetrekin = Zenbaki.zifrakLetretan(zenbakiaZifrekin)
                                 } else {
                                     zenbakiaLetrekin = "[Zenbakia 1000 edo haundiagoa da. Aplikazioa horretarako oraindik ez dago prest.]"
                                 }

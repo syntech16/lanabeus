@@ -1,6 +1,11 @@
-package eus.avallende.lanabeus.utils
+package eus.avallende.lanabeus.model.zenbaki
+
 // static : object
 object Zenbaki {
+    fun zifrakLetretan(zenbakiaZifretan: Int): String {
+        return letretan1000BainoGutxiago(zenbakiaZifretan);
+    }
+
     fun letretan10BainoGutxiago(zenbakiaZifretan: Int): String {
         var zenbakiaLetretan: String
 

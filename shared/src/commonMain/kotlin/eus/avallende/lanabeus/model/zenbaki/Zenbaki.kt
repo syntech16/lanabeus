@@ -3,10 +3,10 @@ package eus.avallende.lanabeus.model.zenbaki
 // static : object
 object Zenbaki {
     fun zifrakLetretan(zenbakiaZifretan: Int): String {
-        return letretan1000BainoGutxiago(zenbakiaZifretan);
+        return zifrakLetretanMilaBainoGutxiago(zenbakiaZifretan);
     }
 
-    fun letretan10BainoGutxiago(zenbakiaZifretan: Int): String {
+    fun zifrakLetretanHamarBainoGutxiago(zenbakiaZifretan: Int): String {
         var zenbakiaLetretan: String
 
         zenbakiaLetretan = when (zenbakiaZifretan) {
@@ -25,7 +25,7 @@ object Zenbaki {
         return zenbakiaLetretan
     }
 
-    fun letretan100BainoGutxiago(zenbakiaZifretan: Int): String {
+    fun zifrakLetretanEhunBainoGutxiago(zenbakiaZifretan: Int): String {
         val hasierakoHogeikoMultzoak = zenbakiaZifretan / 20
         var hogeikoMultzoak = hasierakoHogeikoMultzoak
         val hasierakoHogeikoHondarra = zenbakiaZifretan % 20
@@ -67,14 +67,14 @@ object Zenbaki {
                     }
                 }
 
-                zenbakiaLetretan += letretan10BainoGutxiago(hogeikoHondarra % 10)
+                zenbakiaLetretan += zifrakLetretanHamarBainoGutxiago(hogeikoHondarra % 10)
             }
         }
 
         return zenbakiaLetretan
     }
 
-    fun letretan1000BainoGutxiago(zenbakiaZifretan: Int): String {
+    fun zifrakLetretanMilaBainoGutxiago(zenbakiaZifretan: Int): String {
         var ehunekoak: Int = zenbakiaZifretan / 100
         var ehunekoenHondarra: Int = zenbakiaZifretan % 100
         var zenbakiaLetretan: String = ""
@@ -83,7 +83,7 @@ object Zenbaki {
             zenbakiaLetretan = when (ehunekoak) {
                 2 -> "berr"
                 1 -> ""
-                else -> letretan10BainoGutxiago(ehunekoak)
+                else -> zifrakLetretanHamarBainoGutxiago(ehunekoak)
             }
 
             zenbakiaLetretan += when (ehunekoak) {
@@ -99,7 +99,7 @@ object Zenbaki {
         }
 
         if (!(ehunekoak != 0 && ehunekoenHondarra == 0)) {
-            zenbakiaLetretan += letretan100BainoGutxiago(ehunekoenHondarra)
+            zenbakiaLetretan += zifrakLetretanEhunBainoGutxiago(ehunekoenHondarra)
         }
 
         return zenbakiaLetretan

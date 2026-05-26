@@ -100,8 +100,12 @@ object Zenbaki {
             }
         }
 
-        if (!(ehunekoak != 0 && ehunekoenHondarra == 0)) {
-            zenbakiaLetretan += " " + zifrakLetretanEhunBainoGutxiago(ehunekoenHondarra)
+        if (ehunekoak == 0 || ehunekoenHondarra != 0) {
+            if (ehunekoak != 0) {
+                zenbakiaLetretan += " "
+            }
+
+            zenbakiaLetretan += zifrakLetretanEhunBainoGutxiago(ehunekoenHondarra)
         }
 
         return zenbakiaLetretan
@@ -115,18 +119,22 @@ object Zenbaki {
         if (milakoak != 0) {
             zenbakiaLetretan = when (milakoak) {
                 1 -> ""
-                else -> zifrakLetretanMilaBainoGutxiago(milakoak)
+                else -> zifrakLetretanMilaBainoGutxiago(milakoak) + " "
             }
 
             zenbakiaLetretan += "mila"
 
-            if (ehunekoakDituBatekorikGabe(milakoenHondarra)) {
+            if (bakarrikEhunekoakEdoBatekoakDitu(milakoenHondarra)) {
                 zenbakiaLetretan += " eta"
             }
         }
 
-        if (!(milakoak != 0 && milakoenHondarra == 0)) {
-            zenbakiaLetretan += " " + zifrakLetretanMilaBainoGutxiago(milakoenHondarra)
+        if (milakoak == 0 || milakoenHondarra != 0) {
+            if (milakoak != 0) {
+                zenbakiaLetretan += " "
+            }
+
+            zenbakiaLetretan +=  zifrakLetretanMilaBainoGutxiago(milakoenHondarra)
         }
 
         return zenbakiaLetretan
@@ -142,5 +150,13 @@ object Zenbaki {
 
     fun ehunekoakDituBatekorikGabe(zenbakia: Int): Boolean {
         return (ehunekoakDitu(zenbakia) && !batekoakDitu(zenbakia))
+    }
+
+    fun batekoakDituEhunekorikGabe(zenbakia: Int): Boolean {
+        return (batekoakDitu(zenbakia) && !ehunekoakDitu(zenbakia))
+    }
+
+    fun bakarrikEhunekoakEdoBatekoakDitu(zenbakia: Int): Boolean {
+        return (ehunekoakDituBatekorikGabe(zenbakia) || batekoakDituEhunekorikGabe(zenbakia))
     }
 }

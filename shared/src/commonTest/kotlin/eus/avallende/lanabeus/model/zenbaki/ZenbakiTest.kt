@@ -1,135 +1,183 @@
 package eus.avallende.lanabeus.model.zenbaki
 
 import kotlin.test.Test
-import kotlin.test.assertEquals
+import kotlin.test.fail
 
 class ZenbakiTest {
+
+    @Test
+    fun zenbakiTestGuztiakEgikaritu() {
+        testZifrakLetretan()
+        testZifrakLetretanHamarBainoGutxiago()
+        testLetretanEhunBainoGutxiago()
+        testZifrakLetretanMilaBainoGutxiago()
+        testZifrakLetretanMilioiBainoGutxiago()
+    }
+
+    private fun <T> testaEgikaritu(
+        testarenIzena: String,
+        datuak: List<Pair<T, String>>,
+        testarenFuntzioa: (T) -> String
+    ) {
+        val akatsak = mutableListOf<String>()
+
+        for ((sarrera, itxarotakoBalioa) in datuak) {
+            try {
+                val benetakoBalioa = testarenFuntzioa(sarrera)
+                if (benetakoBalioa != itxarotakoBalioa) {
+                    akatsak.add("Sarrera <$sarrera>: itxaropena bazen <$itxarotakoBalioa> izatea, baina ateratako balioa <$benetakoBalioa> da")
+                }
+            } catch (salb: Exception) {
+                akatsak.add("Sarrera <$sarrera>: botatako salbuespena: ${salb.message}")
+            }
+        }
+
+        if (akatsak.isNotEmpty()) {
+            fail("[$testarenIzena] Akatsdun klaseak:\n${akatsak.joinToString("\n")}")
+        }
+    }
+
     @Test
     fun testZifrakLetretan() {
-        assertEquals(ZenbakiConstants.LETRETAN_0, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_0))
-        assertEquals(ZenbakiConstants.LETRETAN_1, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_1))
-        assertEquals(ZenbakiConstants.LETRETAN_2, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_2))
-        assertEquals(ZenbakiConstants.LETRETAN_3, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_3))
-        assertEquals(ZenbakiConstants.LETRETAN_4, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_4))
-        assertEquals(ZenbakiConstants.LETRETAN_5, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_5))
-        assertEquals(ZenbakiConstants.LETRETAN_6, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_6))
-        assertEquals(ZenbakiConstants.LETRETAN_7, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_7))
-        assertEquals(ZenbakiConstants.LETRETAN_8, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_8))
-        assertEquals(ZenbakiConstants.LETRETAN_9, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_9))
-        assertEquals(ZenbakiConstants.LETRETAN_10, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_10))
-        assertEquals(ZenbakiConstants.LETRETAN_11, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_11))
-        assertEquals(ZenbakiConstants.LETRETAN_12, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_12))
-        assertEquals(ZenbakiConstants.LETRETAN_13, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_13))
-        assertEquals(ZenbakiConstants.LETRETAN_14, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_14))
-        assertEquals(ZenbakiConstants.LETRETAN_15, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_15))
-        assertEquals(ZenbakiConstants.LETRETAN_16, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_16))
-        assertEquals(ZenbakiConstants.LETRETAN_17, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_17))
-        assertEquals(ZenbakiConstants.LETRETAN_18, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_18))
-        assertEquals(ZenbakiConstants.LETRETAN_19, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_19))
-        assertEquals(ZenbakiConstants.LETRETAN_20, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_20))
-        assertEquals(ZenbakiConstants.LETRETAN_21, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_21))
-        assertEquals(ZenbakiConstants.LETRETAN_22, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_22))
-        assertEquals(ZenbakiConstants.LETRETAN_30, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_30))
-        assertEquals(ZenbakiConstants.LETRETAN_31, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_31))
-        assertEquals(ZenbakiConstants.LETRETAN_32, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_32))
-        assertEquals(ZenbakiConstants.LETRETAN_40, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_40))
-        assertEquals(ZenbakiConstants.LETRETAN_47, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_47))
-        assertEquals(ZenbakiConstants.LETRETAN_50, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_50))
-        assertEquals(ZenbakiConstants.LETRETAN_58, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_58))
-        assertEquals(ZenbakiConstants.LETRETAN_60, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_60))
-        assertEquals(ZenbakiConstants.LETRETAN_70, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_70))
-        assertEquals(ZenbakiConstants.LETRETAN_80, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_80))
-        assertEquals(ZenbakiConstants.LETRETAN_90, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_90))
-        assertEquals(ZenbakiConstants.LETRETAN_95, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_95))
-        assertEquals(ZenbakiConstants.LETRETAN_100, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_100))
-        assertEquals(ZenbakiConstants.LETRETAN_101, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_101))
-        assertEquals(ZenbakiConstants.LETRETAN_127, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_127))
-        assertEquals(ZenbakiConstants.LETRETAN_200, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_200))
-        assertEquals(ZenbakiConstants.LETRETAN_240, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_240))
-        assertEquals(ZenbakiConstants.LETRETAN_300, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_300))
-        assertEquals(ZenbakiConstants.LETRETAN_400, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_400))
-        assertEquals(ZenbakiConstants.LETRETAN_500, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_500))
-        assertEquals(ZenbakiConstants.LETRETAN_600, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_600))
-        assertEquals(ZenbakiConstants.LETRETAN_700, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_700))
-        assertEquals(ZenbakiConstants.LETRETAN_731, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_731))
-        assertEquals(ZenbakiConstants.LETRETAN_800, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_800))
-        assertEquals(ZenbakiConstants.LETRETAN_881, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_881))
-        assertEquals(ZenbakiConstants.LETRETAN_900, Zenbaki.zifrakLetretan(ZenbakiConstants.ZIFRETAN_900))
+        val datuak = listOf(
+            ZenbakiConstants.ZIFRETAN_0 to ZenbakiConstants.LETRETAN_0,
+            ZenbakiConstants.ZIFRETAN_1 to ZenbakiConstants.LETRETAN_1,
+            ZenbakiConstants.ZIFRETAN_2 to ZenbakiConstants.LETRETAN_2,
+            ZenbakiConstants.ZIFRETAN_3 to ZenbakiConstants.LETRETAN_3,
+            ZenbakiConstants.ZIFRETAN_4 to ZenbakiConstants.LETRETAN_4,
+            ZenbakiConstants.ZIFRETAN_5 to ZenbakiConstants.LETRETAN_5,
+            ZenbakiConstants.ZIFRETAN_6 to ZenbakiConstants.LETRETAN_6,
+            ZenbakiConstants.ZIFRETAN_7 to ZenbakiConstants.LETRETAN_7,
+            ZenbakiConstants.ZIFRETAN_8 to ZenbakiConstants.LETRETAN_8,
+            ZenbakiConstants.ZIFRETAN_9 to ZenbakiConstants.LETRETAN_9,
+            ZenbakiConstants.ZIFRETAN_10 to ZenbakiConstants.LETRETAN_10,
+            ZenbakiConstants.ZIFRETAN_11 to ZenbakiConstants.LETRETAN_11,
+            ZenbakiConstants.ZIFRETAN_12 to ZenbakiConstants.LETRETAN_12,
+            ZenbakiConstants.ZIFRETAN_13 to ZenbakiConstants.LETRETAN_13,
+            ZenbakiConstants.ZIFRETAN_14 to ZenbakiConstants.LETRETAN_14,
+            ZenbakiConstants.ZIFRETAN_15 to ZenbakiConstants.LETRETAN_15,
+            ZenbakiConstants.ZIFRETAN_16 to ZenbakiConstants.LETRETAN_16,
+            ZenbakiConstants.ZIFRETAN_17 to ZenbakiConstants.LETRETAN_17,
+            ZenbakiConstants.ZIFRETAN_18 to ZenbakiConstants.LETRETAN_18,
+            ZenbakiConstants.ZIFRETAN_19 to ZenbakiConstants.LETRETAN_19,
+            ZenbakiConstants.ZIFRETAN_20 to ZenbakiConstants.LETRETAN_20,
+            ZenbakiConstants.ZIFRETAN_21 to ZenbakiConstants.LETRETAN_21,
+            ZenbakiConstants.ZIFRETAN_22 to ZenbakiConstants.LETRETAN_22,
+            ZenbakiConstants.ZIFRETAN_30 to ZenbakiConstants.LETRETAN_30,
+            ZenbakiConstants.ZIFRETAN_31 to ZenbakiConstants.LETRETAN_31,
+            ZenbakiConstants.ZIFRETAN_32 to ZenbakiConstants.LETRETAN_32,
+            ZenbakiConstants.ZIFRETAN_40 to ZenbakiConstants.LETRETAN_40,
+            ZenbakiConstants.ZIFRETAN_47 to ZenbakiConstants.LETRETAN_47,
+            ZenbakiConstants.ZIFRETAN_50 to ZenbakiConstants.LETRETAN_50,
+            ZenbakiConstants.ZIFRETAN_58 to ZenbakiConstants.LETRETAN_58,
+            ZenbakiConstants.ZIFRETAN_60 to ZenbakiConstants.LETRETAN_60,
+            ZenbakiConstants.ZIFRETAN_70 to ZenbakiConstants.LETRETAN_70,
+            ZenbakiConstants.ZIFRETAN_80 to ZenbakiConstants.LETRETAN_80,
+            ZenbakiConstants.ZIFRETAN_90 to ZenbakiConstants.LETRETAN_90,
+            ZenbakiConstants.ZIFRETAN_95 to ZenbakiConstants.LETRETAN_95,
+            ZenbakiConstants.ZIFRETAN_100 to ZenbakiConstants.LETRETAN_100,
+            ZenbakiConstants.ZIFRETAN_101 to ZenbakiConstants.LETRETAN_101,
+            ZenbakiConstants.ZIFRETAN_127 to ZenbakiConstants.LETRETAN_127,
+            ZenbakiConstants.ZIFRETAN_200 to ZenbakiConstants.LETRETAN_200,
+            ZenbakiConstants.ZIFRETAN_240 to ZenbakiConstants.LETRETAN_240,
+            ZenbakiConstants.ZIFRETAN_300 to ZenbakiConstants.LETRETAN_300,
+            ZenbakiConstants.ZIFRETAN_400 to ZenbakiConstants.LETRETAN_400,
+            ZenbakiConstants.ZIFRETAN_500 to ZenbakiConstants.LETRETAN_500,
+            ZenbakiConstants.ZIFRETAN_600 to ZenbakiConstants.LETRETAN_600,
+            ZenbakiConstants.ZIFRETAN_700 to ZenbakiConstants.LETRETAN_700,
+            ZenbakiConstants.ZIFRETAN_731 to ZenbakiConstants.LETRETAN_731,
+            ZenbakiConstants.ZIFRETAN_800 to ZenbakiConstants.LETRETAN_800,
+            ZenbakiConstants.ZIFRETAN_881 to ZenbakiConstants.LETRETAN_881,
+            ZenbakiConstants.ZIFRETAN_900 to ZenbakiConstants.LETRETAN_900
+        )
+        testaEgikaritu("zifrakLetretan", datuak) { Zenbaki.zifrakLetretan(it) }
     }
 
     @Test
     fun testZifrakLetretanHamarBainoGutxiago() {
-        assertEquals(ZenbakiConstants.LETRETAN_1, Zenbaki.zifrakLetretanHamarBainoGutxiago(ZenbakiConstants.ZIFRETAN_1))
-        assertEquals(ZenbakiConstants.LETRETAN_2, Zenbaki.zifrakLetretanHamarBainoGutxiago(ZenbakiConstants.ZIFRETAN_2))
-        assertEquals(ZenbakiConstants.LETRETAN_3, Zenbaki.zifrakLetretanHamarBainoGutxiago(ZenbakiConstants.ZIFRETAN_3))
-        assertEquals(ZenbakiConstants.LETRETAN_4, Zenbaki.zifrakLetretanHamarBainoGutxiago(ZenbakiConstants.ZIFRETAN_4))
-        assertEquals(ZenbakiConstants.LETRETAN_5, Zenbaki.zifrakLetretanHamarBainoGutxiago(ZenbakiConstants.ZIFRETAN_5))
-        assertEquals(ZenbakiConstants.LETRETAN_6, Zenbaki.zifrakLetretanHamarBainoGutxiago(ZenbakiConstants.ZIFRETAN_6))
-        assertEquals(ZenbakiConstants.LETRETAN_7, Zenbaki.zifrakLetretanHamarBainoGutxiago(ZenbakiConstants.ZIFRETAN_7))
-        assertEquals(ZenbakiConstants.LETRETAN_8, Zenbaki.zifrakLetretanHamarBainoGutxiago(ZenbakiConstants.ZIFRETAN_8))
-        assertEquals(ZenbakiConstants.LETRETAN_9, Zenbaki.zifrakLetretanHamarBainoGutxiago(ZenbakiConstants.ZIFRETAN_9))
+        val datuak = listOf(
+            ZenbakiConstants.ZIFRETAN_1 to ZenbakiConstants.LETRETAN_1,
+            ZenbakiConstants.ZIFRETAN_2 to ZenbakiConstants.LETRETAN_2,
+            ZenbakiConstants.ZIFRETAN_3 to ZenbakiConstants.LETRETAN_3,
+            ZenbakiConstants.ZIFRETAN_4 to ZenbakiConstants.LETRETAN_4,
+            ZenbakiConstants.ZIFRETAN_5 to ZenbakiConstants.LETRETAN_5,
+            ZenbakiConstants.ZIFRETAN_6 to ZenbakiConstants.LETRETAN_6,
+            ZenbakiConstants.ZIFRETAN_7 to ZenbakiConstants.LETRETAN_7,
+            ZenbakiConstants.ZIFRETAN_8 to ZenbakiConstants.LETRETAN_8,
+            ZenbakiConstants.ZIFRETAN_9 to ZenbakiConstants.LETRETAN_9
+        )
+        testaEgikaritu("zifrakLetretanHamarBainoGutxiago", datuak) { Zenbaki.zifrakLetretanHamarBainoGutxiago(it) }
     }
 
     @Test
     fun testLetretanEhunBainoGutxiago() {
-        assertEquals(ZenbakiConstants.LETRETAN_10, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_10))
-        assertEquals(ZenbakiConstants.LETRETAN_11, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_11))
-        assertEquals(ZenbakiConstants.LETRETAN_12, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_12))
-        assertEquals(ZenbakiConstants.LETRETAN_13, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_13))
-        assertEquals(ZenbakiConstants.LETRETAN_14, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_14))
-        assertEquals(ZenbakiConstants.LETRETAN_15, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_15))
-        assertEquals(ZenbakiConstants.LETRETAN_16, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_16))
-        assertEquals(ZenbakiConstants.LETRETAN_17, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_17))
-        assertEquals(ZenbakiConstants.LETRETAN_18, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_18))
-        assertEquals(ZenbakiConstants.LETRETAN_19, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_19))
-        assertEquals(ZenbakiConstants.LETRETAN_20, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_20))
-        assertEquals(ZenbakiConstants.LETRETAN_21, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_21))
-        assertEquals(ZenbakiConstants.LETRETAN_22, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_22))
-        assertEquals(ZenbakiConstants.LETRETAN_30, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_30))
-        assertEquals(ZenbakiConstants.LETRETAN_31, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_31))
-        assertEquals(ZenbakiConstants.LETRETAN_32, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_32))
-        assertEquals(ZenbakiConstants.LETRETAN_40, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_40))
-        assertEquals(ZenbakiConstants.LETRETAN_47, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_47))
-        assertEquals(ZenbakiConstants.LETRETAN_50, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_50))
-        assertEquals(ZenbakiConstants.LETRETAN_58, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_58))
-        assertEquals(ZenbakiConstants.LETRETAN_60, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_60))
-        assertEquals(ZenbakiConstants.LETRETAN_70, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_70))
-        assertEquals(ZenbakiConstants.LETRETAN_80, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_80))
-        assertEquals(ZenbakiConstants.LETRETAN_90, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_90))
-        assertEquals(ZenbakiConstants.LETRETAN_95, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_95))
+        val datuak = listOf(
+            ZenbakiConstants.ZIFRETAN_10 to ZenbakiConstants.LETRETAN_10,
+            ZenbakiConstants.ZIFRETAN_11 to ZenbakiConstants.LETRETAN_11,
+            ZenbakiConstants.ZIFRETAN_12 to ZenbakiConstants.LETRETAN_12,
+            ZenbakiConstants.ZIFRETAN_13 to ZenbakiConstants.LETRETAN_13,
+            ZenbakiConstants.ZIFRETAN_14 to ZenbakiConstants.LETRETAN_14,
+            ZenbakiConstants.ZIFRETAN_15 to ZenbakiConstants.LETRETAN_15,
+            ZenbakiConstants.ZIFRETAN_16 to ZenbakiConstants.LETRETAN_16,
+            ZenbakiConstants.ZIFRETAN_17 to ZenbakiConstants.LETRETAN_17,
+            ZenbakiConstants.ZIFRETAN_18 to ZenbakiConstants.LETRETAN_18,
+            ZenbakiConstants.ZIFRETAN_19 to ZenbakiConstants.LETRETAN_19,
+            ZenbakiConstants.ZIFRETAN_20 to ZenbakiConstants.LETRETAN_20,
+            ZenbakiConstants.ZIFRETAN_21 to ZenbakiConstants.LETRETAN_21,
+            ZenbakiConstants.ZIFRETAN_22 to ZenbakiConstants.LETRETAN_22,
+            ZenbakiConstants.ZIFRETAN_30 to ZenbakiConstants.LETRETAN_30,
+            ZenbakiConstants.ZIFRETAN_31 to ZenbakiConstants.LETRETAN_31,
+            ZenbakiConstants.ZIFRETAN_32 to ZenbakiConstants.LETRETAN_32,
+            ZenbakiConstants.ZIFRETAN_40 to ZenbakiConstants.LETRETAN_40,
+            ZenbakiConstants.ZIFRETAN_47 to ZenbakiConstants.LETRETAN_47,
+            ZenbakiConstants.ZIFRETAN_50 to ZenbakiConstants.LETRETAN_50,
+            ZenbakiConstants.ZIFRETAN_58 to ZenbakiConstants.LETRETAN_58,
+            ZenbakiConstants.ZIFRETAN_60 to ZenbakiConstants.LETRETAN_60,
+            ZenbakiConstants.ZIFRETAN_70 to ZenbakiConstants.LETRETAN_70,
+            ZenbakiConstants.ZIFRETAN_80 to ZenbakiConstants.LETRETAN_80,
+            ZenbakiConstants.ZIFRETAN_90 to ZenbakiConstants.LETRETAN_90,
+            ZenbakiConstants.ZIFRETAN_95 to ZenbakiConstants.LETRETAN_95
+        )
+        testaEgikaritu("zifrakLetretanEhunBainoGutxiago", datuak) { Zenbaki.zifrakLetretanEhunBainoGutxiago(it) }
     }
 
     @Test
     fun testZifrakLetretanMilaBainoGutxiago() {
-        assertEquals(ZenbakiConstants.LETRETAN_100, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_100))
-        assertEquals(ZenbakiConstants.LETRETAN_101, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_101))
-        assertEquals(ZenbakiConstants.LETRETAN_127, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_127))
-        assertEquals(ZenbakiConstants.LETRETAN_200, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_200))
-        assertEquals(ZenbakiConstants.LETRETAN_240, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_240))
-        assertEquals(ZenbakiConstants.LETRETAN_300, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_300))
-        assertEquals(ZenbakiConstants.LETRETAN_400, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_400))
-        assertEquals(ZenbakiConstants.LETRETAN_500, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_500))
-        assertEquals(ZenbakiConstants.LETRETAN_600, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_600))
-        assertEquals(ZenbakiConstants.LETRETAN_700, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_700))
-        assertEquals(ZenbakiConstants.LETRETAN_731, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_731))
-        assertEquals(ZenbakiConstants.LETRETAN_800, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_800))
-        assertEquals(ZenbakiConstants.LETRETAN_881, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_881))
-        assertEquals(ZenbakiConstants.LETRETAN_900, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_900))
+        val datuak = listOf(
+            ZenbakiConstants.ZIFRETAN_100 to ZenbakiConstants.LETRETAN_100,
+            ZenbakiConstants.ZIFRETAN_101 to ZenbakiConstants.LETRETAN_101,
+            ZenbakiConstants.ZIFRETAN_127 to ZenbakiConstants.LETRETAN_127,
+            ZenbakiConstants.ZIFRETAN_200 to ZenbakiConstants.LETRETAN_200,
+            ZenbakiConstants.ZIFRETAN_240 to ZenbakiConstants.LETRETAN_240,
+            ZenbakiConstants.ZIFRETAN_300 to ZenbakiConstants.LETRETAN_300,
+            ZenbakiConstants.ZIFRETAN_400 to ZenbakiConstants.LETRETAN_400,
+            ZenbakiConstants.ZIFRETAN_500 to ZenbakiConstants.LETRETAN_500,
+            ZenbakiConstants.ZIFRETAN_600 to ZenbakiConstants.LETRETAN_600,
+            ZenbakiConstants.ZIFRETAN_700 to ZenbakiConstants.LETRETAN_700,
+            ZenbakiConstants.ZIFRETAN_731 to ZenbakiConstants.LETRETAN_731,
+            ZenbakiConstants.ZIFRETAN_800 to ZenbakiConstants.LETRETAN_800,
+            ZenbakiConstants.ZIFRETAN_881 to ZenbakiConstants.LETRETAN_881,
+            ZenbakiConstants.ZIFRETAN_900 to ZenbakiConstants.LETRETAN_900
+        )
+        testaEgikaritu("zifrakLetretanMilaBainoGutxiago", datuak) { Zenbaki.zifrakLetretanMilaBainoGutxiago(it) }
     }
 
     @Test
     fun testZifrakLetretanMilioiBainoGutxiago() {
-        assertEquals(ZenbakiConstants.LETRETAN_1000, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_1000))
-        assertEquals(ZenbakiConstants.LETRETAN_1123, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_1123))
-        assertEquals(ZenbakiConstants.LETRETAN_1200, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_1200))
-        assertEquals(ZenbakiConstants.LETRETAN_2000, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_2000))
-        assertEquals(ZenbakiConstants.LETRETAN_3000, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_3000))
-        assertEquals(ZenbakiConstants.LETRETAN_5456, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_5456))
-        assertEquals(ZenbakiConstants.LETRETAN_7020, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_7020))
-        assertEquals(ZenbakiConstants.LETRETAN_22800, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_22800))
-        assertEquals(ZenbakiConstants.LETRETAN_26671, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_26671))
-        assertEquals(ZenbakiConstants.LETRETAN_100300, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_100300))
-        assertEquals(ZenbakiConstants.LETRETAN_500000, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_500000))
-        assertEquals(ZenbakiConstants.LETRETAN_521521, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_521521))
+        val datuak = listOf(
+            ZenbakiConstants.ZIFRETAN_1000 to ZenbakiConstants.LETRETAN_1000,
+            ZenbakiConstants.ZIFRETAN_1123 to ZenbakiConstants.LETRETAN_1123,
+            ZenbakiConstants.ZIFRETAN_1200 to ZenbakiConstants.LETRETAN_1200,
+            ZenbakiConstants.ZIFRETAN_2000 to ZenbakiConstants.LETRETAN_2000,
+            ZenbakiConstants.ZIFRETAN_3000 to ZenbakiConstants.LETRETAN_3000,
+            ZenbakiConstants.ZIFRETAN_5456 to ZenbakiConstants.LETRETAN_5456,
+            ZenbakiConstants.ZIFRETAN_7020 to ZenbakiConstants.LETRETAN_7020,
+            ZenbakiConstants.ZIFRETAN_22800 to ZenbakiConstants.LETRETAN_22800,
+            ZenbakiConstants.ZIFRETAN_26671 to ZenbakiConstants.LETRETAN_26671,
+            ZenbakiConstants.ZIFRETAN_100300 to ZenbakiConstants.LETRETAN_100300,
+            ZenbakiConstants.ZIFRETAN_500000 to ZenbakiConstants.LETRETAN_500000,
+            ZenbakiConstants.ZIFRETAN_521521 to ZenbakiConstants.LETRETAN_521521
+        )
+        testaEgikaritu("zifrakLetretanMilioiBainoGutxiago", datuak) { Zenbaki.zifrakLetretanMilioiBainoGutxiago(it) }
     }
 }

@@ -2,8 +2,10 @@ package eus.avallende.lanabeus.model.zenbaki
 
 // static : object
 object Zenbaki {
+    const val ZIFRAK_LETRETAN_BIHURTZEKO_ZENBAKIRIK_ALTUENA = 1000000
+
     fun zifrakLetretan(zenbakiaZifretan: Int): String {
-        return zifrakLetretanMilaBainoGutxiago(zenbakiaZifretan);
+        return zifrakLetretanMilioiBainoGutxiago(zenbakiaZifretan);
     }
 
     fun zifrakLetretanHamarBainoGutxiago(zenbakiaZifretan: Int): String {
@@ -94,14 +96,51 @@ object Zenbaki {
             zenbakiaLetretan += "ehun"
 
             if (ehunekoenHondarra != 0) {
-                zenbakiaLetretan += " eta "
+                zenbakiaLetretan += " eta"
             }
         }
 
         if (!(ehunekoak != 0 && ehunekoenHondarra == 0)) {
-            zenbakiaLetretan += zifrakLetretanEhunBainoGutxiago(ehunekoenHondarra)
+            zenbakiaLetretan += " " + zifrakLetretanEhunBainoGutxiago(ehunekoenHondarra)
         }
 
         return zenbakiaLetretan
+    }
+
+    fun zifrakLetretanMilioiBainoGutxiago(zenbakiaZifretan: Int): String {
+        var milakoak: Int = zenbakiaZifretan / 1000
+        var milakoenHondarra: Int = zenbakiaZifretan % 1000
+        var zenbakiaLetretan: String = ""
+
+        if (milakoak != 0) {
+            zenbakiaLetretan = when (milakoak) {
+                1 -> ""
+                else -> zifrakLetretanMilaBainoGutxiago(milakoak)
+            }
+
+            zenbakiaLetretan += "mila"
+
+            if (ehunekoakDituBatekorikGabe(milakoenHondarra)) {
+                zenbakiaLetretan += " eta"
+            }
+        }
+
+        if (!(milakoak != 0 && milakoenHondarra == 0)) {
+            zenbakiaLetretan += " " + zifrakLetretanMilaBainoGutxiago(milakoenHondarra)
+        }
+
+        return zenbakiaLetretan
+    }
+
+    fun batekoakDitu(zenbakia: Int): Boolean {
+        return (zenbakia % 100 != 0)
+    }
+
+    fun ehunekoakDitu(zenbakia: Int): Boolean {
+        return ((zenbakia % 1000) - (zenbakia % 100) != 0)
+    }
+
+    fun ehunekoakDituBatekorikGabe(zenbakia: Int): Boolean {
+        return (ehunekoakDitu(zenbakia) && !batekoakDitu(zenbakia))
     }
 }

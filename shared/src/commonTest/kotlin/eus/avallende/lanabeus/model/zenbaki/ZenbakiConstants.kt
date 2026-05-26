@@ -154,6 +154,9 @@ object ZenbakiConstants {
     const val ZIFRETAN_1123 = 1123
     const val LETRETAN_1123 = "mila ehun eta hogeita hiru"
 
+    const val ZIFRETAN_1200 = 1200
+    const val LETRETAN_1200 = "mila eta berrehun"
+
     const val ZIFRETAN_2000 = 2000
     const val LETRETAN_2000 = "bi mila"
 
@@ -163,8 +166,17 @@ object ZenbakiConstants {
     const val ZIFRETAN_5456 = 5456
     const val LETRETAN_5456 = "bost mila laurehun eta berrogeita hamasei"
 
+    const val ZIFRETAN_7020 = 7020
+    const val LETRETAN_7020 = "zazpi mila eta hogei"
+
+    const val ZIFRETAN_22800 = 22800
+    const val LETRETAN_22800 = "hogeita bi mila eta zortziehun"
+
     const val ZIFRETAN_26671 = 26671
     const val LETRETAN_26671 = "hogeita sei mila seiehun eta hirurogeita hamaika"
+
+    const val ZIFRETAN_100300 = 100300
+    const val LETRETAN_100300 = "ehun mila eta hirurehun"
 
     const val ZIFRETAN_500000 = 500000
     const val LETRETAN_500000 = "bostehun mila"

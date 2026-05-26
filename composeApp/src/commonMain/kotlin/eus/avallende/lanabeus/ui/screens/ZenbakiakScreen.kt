@@ -61,10 +61,10 @@ fun ZenbakiakScreen() {
                             val zenbakiaZifrekin : Int
                             try {
                                 zenbakiaZifrekin = zenbakiaZifrekinStringean.toInt()
-                                if (zenbakiaZifrekin < 1000) {
+                                if (zenbakiaZifrekin < Zenbaki.ZIFRAK_LETRETAN_BIHURTZEKO_ZENBAKIRIK_ALTUENA) {
                                     zenbakiaLetrekin = Zenbaki.zifrakLetretan(zenbakiaZifrekin)
                                 } else {
-                                    zenbakiaLetrekin = "[Zenbakia 1000 edo haundiagoa da. Aplikazioa horretarako oraindik ez dago prest.]"
+                                    zenbakiaLetrekin = "[Zenbakia ${Zenbaki.ZIFRAK_LETRETAN_BIHURTZEKO_ZENBAKIRIK_ALTUENA} edo haundiagoa da. Aplikazioa horretarako oraindik ez dago prest.]"
                                 }
                             } catch (numberFormatException: NumberFormatException) {
                                 // TODO: not a number

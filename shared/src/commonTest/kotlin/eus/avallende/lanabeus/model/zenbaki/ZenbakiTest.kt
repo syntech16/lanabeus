@@ -71,7 +71,7 @@ class ZenbakiTest {
     }
 
     @Test
-    fun testLetretan100BainoGutxiago() {
+    fun testLetretanEhunBainoGutxiago() {
         assertEquals(ZenbakiConstants.LETRETAN_10, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_10))
         assertEquals(ZenbakiConstants.LETRETAN_11, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_11))
         assertEquals(ZenbakiConstants.LETRETAN_12, Zenbaki.zifrakLetretanEhunBainoGutxiago(ZenbakiConstants.ZIFRETAN_12))
@@ -115,5 +115,21 @@ class ZenbakiTest {
         assertEquals(ZenbakiConstants.LETRETAN_800, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_800))
         assertEquals(ZenbakiConstants.LETRETAN_881, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_881))
         assertEquals(ZenbakiConstants.LETRETAN_900, Zenbaki.zifrakLetretanMilaBainoGutxiago(ZenbakiConstants.ZIFRETAN_900))
+    }
+
+    @Test
+    fun testZifrakLetretanMilioiBainoGutxiago() {
+        assertEquals(ZenbakiConstants.LETRETAN_1000, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_1000))
+        assertEquals(ZenbakiConstants.LETRETAN_1123, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_1123))
+        assertEquals(ZenbakiConstants.LETRETAN_1200, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_1200))
+        assertEquals(ZenbakiConstants.LETRETAN_2000, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_2000))
+        assertEquals(ZenbakiConstants.LETRETAN_3000, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_3000))
+        assertEquals(ZenbakiConstants.LETRETAN_5456, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_5456))
+        assertEquals(ZenbakiConstants.LETRETAN_7020, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_7020))
+        assertEquals(ZenbakiConstants.LETRETAN_22800, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_22800))
+        assertEquals(ZenbakiConstants.LETRETAN_26671, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_26671))
+        assertEquals(ZenbakiConstants.LETRETAN_100300, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_100300))
+        assertEquals(ZenbakiConstants.LETRETAN_500000, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_500000))
+        assertEquals(ZenbakiConstants.LETRETAN_521521, Zenbaki.zifrakLetretanMilioiBainoGutxiago(ZenbakiConstants.ZIFRETAN_521521))
     }
 }

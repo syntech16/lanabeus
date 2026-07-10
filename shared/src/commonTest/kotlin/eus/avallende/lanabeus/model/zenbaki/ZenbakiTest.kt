@@ -12,6 +12,7 @@ class ZenbakiTest {
         testLetretanEhunBainoGutxiago()
         testZifrakLetretanMilaBainoGutxiago()
         testZifrakLetretanMilioiBainoGutxiago()
+        testZifrakLetretanMilaMilioiBainoGutxiago()
     }
 
     private fun <T> testaEgikaritu(
@@ -179,5 +180,25 @@ class ZenbakiTest {
             ZenbakiConstants.ZIFRETAN_521521 to ZenbakiConstants.LETRETAN_521521
         )
         testaEgikaritu("zifrakLetretanMilioiBainoGutxiago", datuak) { Zenbaki.zifrakLetretanMilioiBainoGutxiago(it) }
+    }
+
+    @Test
+    fun testZifrakLetretanMilaMilioiBainoGutxiago() {
+        val datuak = listOf(
+            ZenbakiConstants.ZIFRETAN_1100000 to ZenbakiConstants.LETRETAN_1100000,
+            ZenbakiConstants.ZIFRETAN_5000001 to ZenbakiConstants.LETRETAN_5000001,
+            ZenbakiConstants.ZIFRETAN_5000450 to ZenbakiConstants.LETRETAN_5000450,
+            ZenbakiConstants.ZIFRETAN_7450000 to ZenbakiConstants.LETRETAN_7450000,
+            ZenbakiConstants.ZIFRETAN_110200600 to ZenbakiConstants.LETRETAN_110200600
+        )
+        testaEgikaritu("zifrakLetretanMilaMilioiBainoGutxiago", datuak) { Zenbaki.zifrakLetretanMilaMilioiBainoGutxiago(it) }
+    }
+
+    @Test
+    fun testBakarraEgikaritu() {
+        val datuak = listOf(
+            ZenbakiConstants.ZIFRETAN_7450000 to ZenbakiConstants.LETRETAN_7450000
+        )
+        testaEgikaritu("zifrakLetretanMilaMilioiBainoGutxiago", datuak) { Zenbaki.zifrakLetretanMilaMilioiBainoGutxiago(it) }
     }
 }

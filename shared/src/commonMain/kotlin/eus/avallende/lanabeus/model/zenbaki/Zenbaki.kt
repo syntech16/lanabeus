@@ -2,10 +2,10 @@ package eus.avallende.lanabeus.model.zenbaki
 
 // static : object
 object Zenbaki {
-    const val ZIFRAK_LETRETAN_BIHURTZEKO_ZENBAKIRIK_ALTUENA = 1000000
+    const val ZIFRAK_LETRETAN_BIHURTZEKO_ZENBAKIRIK_ALTUENA = 1000000000
 
     fun zifrakLetretan(zenbakiaZifretan: Int): String {
-        return zifrakLetretanMilioiBainoGutxiago(zenbakiaZifretan);
+        return zifrakLetretanMilaMilioiBainoGutxiago(zenbakiaZifretan);
     }
 
     fun zifrakLetretanHamarBainoGutxiago(zenbakiaZifretan: Int): String {
@@ -140,13 +140,120 @@ object Zenbaki {
         return zenbakiaLetretan
     }
 
+    fun zifrakLetretanMilaMilioiBainoGutxiago(zenbakiaZifretan: Int): String {
+        var milioikoak: Int = zenbakiaZifretan / 1000000
+        var milioikoenHondarra: Int = zenbakiaZifretan % 1000000
+        var zenbakiaLetretan: String = ""
+
+        if (milioikoak != 0) {
+            zenbakiaLetretan = when (milioikoak) {
+                1 -> ""
+                else -> zifrakLetretanMilaBainoGutxiago(milioikoak) + " "
+            }
+
+            zenbakiaLetretan += "milioi"
+
+            if (milioikoak == 1) {
+                zenbakiaLetretan += " bat"
+            }
+
+            zenbakiaLetretan += when (zenbatMultzoFaltaDiraMilioikoenHondarrean(milioikoenHondarra)) {
+                2 -> ","
+                1 -> " eta"
+                else -> ""
+            }
+        }
+
+        if (milioikoak == 0 || milioikoenHondarra != 0) {
+            if (milioikoak != 0) {
+                zenbakiaLetretan += " "
+            }
+
+            zenbakiaLetretan +=  zifrakLetretanMilioiBainoGutxiago(milioikoenHondarra)
+        }
+
+        return zenbakiaLetretan
+    }
+
+    // Hondarrak lortu
+
+    fun ehunekoenHondarraLortu(zenbakia: Int): Int {
+        return zenbakia % 100
+    }
+
+    fun batekoMilakoenHondarraLortu(zenbakia: Int): Int {
+        return zenbakia % 1000
+    }
+
+    fun ehunekoMilakoenHondarraLortu(zenbakia: Int): Int {
+        return zenbakia % 100000
+    }
+
+    fun batekoMilioikoenHondarraLortu(zenbakia: Int): Int {
+        return zenbakia % 1000000
+    }
+
+    fun ehunekoMilioikoenHondarraLortu(zenbakia: Int): Int {
+        return zenbakia % 100000000
+    }
+
+    fun batekoMilaMilioienHondarra(zenbakia: Int): Int {
+        return zenbakia % 1000000000
+    }
+
+    // Zatiak lortu
+
+    fun batekoakLortu(zenbakia: Int): Int {
+        return ehunekoenHondarraLortu(zenbakia)
+    }
+
+    fun ehunekoakLortu(zenbakia: Int): Int {
+        return batekoMilakoenHondarraLortu(zenbakia) - ehunekoenHondarraLortu(zenbakia)
+    }
+
+    fun batekoMilakoakLortu(zenbakia: Int): Int {
+        return ehunekoMilakoenHondarraLortu(zenbakia) - batekoMilakoenHondarraLortu(zenbakia)
+    }
+
+    fun ehunekoMilakoakLortu(zenbakia: Int): Int {
+        return batekoMilioikoenHondarraLortu(zenbakia) - ehunekoMilakoenHondarraLortu(zenbakia)
+    }
+
+    fun batekoMilioiakLortu(zenbakia: Int): Int {
+        return ehunekoMilioikoenHondarraLortu(zenbakia) - batekoMilioikoenHondarraLortu(zenbakia)
+    }
+
+    fun ehunekoMilioiakLortu(zenbakia: Int): Int {
+        return batekoMilaMilioienHondarra(zenbakia) - ehunekoMilioikoenHondarraLortu(zenbakia)
+    }
+
+    // Zatiak ditu
+
     fun batekoakDitu(zenbakia: Int): Boolean {
-        return (zenbakia % 100 != 0)
+        return (ehunekoenHondarraLortu(zenbakia) != 0)
     }
 
     fun ehunekoakDitu(zenbakia: Int): Boolean {
-        return ((zenbakia % 1000) - (zenbakia % 100) != 0)
+        return (ehunekoakLortu(zenbakia) != 0)
     }
+
+    fun batekoMilakoakDitu(zenbakia: Int): Boolean {
+        return (batekoMilakoakLortu(zenbakia) != 0)
+    }
+
+    fun ehunekoMilakoakDitu(zenbakia: Int): Boolean {
+        return (ehunekoMilakoakLortu(zenbakia) != 0)
+    }
+
+    fun batekoMilioiakDitu(zenbakia: Int): Boolean {
+        return (batekoMilioiakLortu(zenbakia) != 0)
+    }
+
+    fun ehunekoMilioiakDitu(zenbakia: Int): Boolean {
+        return (ehunekoMilioiakLortu(zenbakia) != 0)
+    }
+
+    // Bakarrik X ditu
 
     fun ehunekoakDituBatekorikGabe(zenbakia: Int): Boolean {
         return (ehunekoakDitu(zenbakia) && !batekoakDitu(zenbakia))
@@ -158,5 +265,27 @@ object Zenbaki {
 
     fun bakarrikEhunekoakEdoBatekoakDitu(zenbakia: Int): Boolean {
         return (ehunekoakDituBatekorikGabe(zenbakia) || batekoakDituEhunekorikGabe(zenbakia))
+    }
+
+    fun zenbatMultzoFaltaDiraMilioikoenHondarrean(hondarra: Int): Int {
+        var faltaDirenMultzoak: Int = 0
+
+        if (batekoakDitu(hondarra)) {
+            faltaDirenMultzoak++
+        }
+
+        if (ehunekoakDitu(hondarra)) {
+            faltaDirenMultzoak++
+        }
+
+        if (batekoMilakoakDitu(hondarra)) {
+            faltaDirenMultzoak++
+        }
+
+        if (ehunekoMilakoakDitu(hondarra)) {
+            faltaDirenMultzoak++
+        }
+
+        return faltaDirenMultzoak
     }
 }

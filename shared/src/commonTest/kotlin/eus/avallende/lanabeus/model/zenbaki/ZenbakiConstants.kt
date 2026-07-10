@@ -187,6 +187,21 @@ object ZenbakiConstants {
     const val ZIFRETAN_1000000 = 1000000
     const val LETRETAN_1000000 = "milioi bat"
 
+    const val ZIFRETAN_1100000 = 1100000
+    const val LETRETAN_1100000 = "milioi bat eta ehun mila"
+
+    const val ZIFRETAN_5000001 = 5000001
+    const val LETRETAN_5000001 = "bost milioi eta bat"
+
+    const val ZIFRETAN_5000450 = 5000450
+    const val LETRETAN_5000450 = "bost milioi, laurehun eta berrogeita hamar"
+
+    const val ZIFRETAN_7450000 = 7450000
+    const val LETRETAN_7450000 = "zazpi milioi, laurehun eta berrogeita hamar mila"
+
+    const val ZIFRETAN_110200600 = 110200600
+    const val LETRETAN_110200600 = "ehun eta hamar milioi, berrehun mila eta seiehun"
+
     const val ZIFRETAN_1000000000 = 1000000000
     const val LETRETAN_1000000000 = "miliar bat"
 }
